@@ -55,6 +55,10 @@ module.exports = {
     config.output.filename(`js_${date}/[name].[hash:8].js`).chunkFilename(`js_${date}/[name].[hash:8].js`);
   },
   productionSourceMap: false,
+  lintOnSave: false,
+  productionSourceMap: false,
+  baseUrl: './',
+  outputDir: 'docs',
   devServer: {
     proxy: {
       '/sys': proxy
