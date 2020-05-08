@@ -66,6 +66,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
 │   │   ├── pageScrollbar               <=  页面滚动条组件
 │   │   ├── pageTable                   <=  表格组件 
 │   │   ├── pageTitle                   <=  页面标题组件
+│   ├── i18n                            <=  国际化
 │   ├── lib                             <=  三方库
 │   ├── mixins                          <=  页面公共逻辑    
 │   ├── modules                         <=  系统模块
