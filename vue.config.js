@@ -57,7 +57,7 @@ module.exports = {
   productionSourceMap: false,
   lintOnSave: false,
   productionSourceMap: false,
-  baseUrl: './',
+  // baseUrl: './',
   outputDir: 'docs',
   devServer: {
     proxy: {

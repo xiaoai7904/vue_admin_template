@@ -7,7 +7,7 @@ import mock from '@/module/mock/mock.module';
 
 class Http {
   constructor() {
-    this.local = localStorage.getItem('i18n') || 'zh-Hans-CN';
+    this.local = localStorage.getItem('i18n') || 'zh';
     this.$http = axios.create({});
     this.init();
   }

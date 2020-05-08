@@ -252,10 +252,7 @@ export default {
             .post(httpUrl.deleteUser, { userIds: [row.id] })
             .then(data => {
               this.pageModalOptions.show = false;
-              this.$Notice.success({
-                title: '成功',
-                desc: '操作成功'
-              });
+              this.tips()
               this.requestList();
             })
             .finally(() => {
@@ -295,10 +292,7 @@ export default {
             .post(httpUrl.addUser, params)
             .then(data => {
               this.pageModalOptions.show = false;
-              this.$Notice.success({
-                title: '成功',
-                desc: '操作成功'
-              });
+              this.tips()
               this.requestList();
             })
             .finally(() => {

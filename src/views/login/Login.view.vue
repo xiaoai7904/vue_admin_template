@@ -4,14 +4,14 @@
     <Row type="flex" justify="center" align="middle">
       <Col class="login-item" :xs="24" :sm="24" :md="24" :lg="24">
         <div class="login-form">
-          <h1 class="login-form-title">账号登录</h1>
+          <h1 class="login-form-title">{{$t('login_title')}}</h1>
           <Form ref="loginFormRef" :model="loginFormModel" :rules="loginFormRule">
             <FormItem prop="username">
               <Input
                 v-model="loginFormModel.username"
                 @on-enter="enterEvent"
                 size="large"
-                placeholder="请输入账号"
+                :placeholder="$t('common_tips1')"
               ></Input>
               <i class="login-form-user--icon"></i>
             </FormItem>
@@ -21,29 +21,25 @@
                 @on-enter="enterEvent"
                 type="password"
                 size="large"
-                placeholder="请输入密码"
+                :placeholder="$t('common_tips2')"
               ></Input>
               <i class="login-form-password--icon"></i>
             </FormItem>
-            <!-- <FormItem prop="safeCode">
-              <Input v-model="loginFormModel.safeCode" @on-enter="enterEvent" size="large" placeholder="请输入安全码"></Input>
-              <i class="login-form-password--icon"></i>
-            </FormItem>-->
             <FormItem>
               <div class="login-remember">
-                <Checkbox v-model="remember">记住我的账号</Checkbox>
-                <!--                <span class="login-remember-password">忘记密码</span>-->
+                <Checkbox v-model="remember">{{$t('login_remember')}}</Checkbox>
+                <ul class="login-locales">
+                  <li @click="changeLocal('zh')">中文</li>
+                  <li @click="changeLocal('en')">English</li>
+                </ul>
               </div>
             </FormItem>
             <FormItem>
-              <Button type="primary" @click="login">登&nbsp;&nbsp;录</Button>
+              <Button type="primary" @click="login">{{$t('login_submit')}}</Button>
             </FormItem>
           </Form>
         </div>
       </Col>
-      <!-- <Col class="login-item" :xs="0" :sm="0" :md="8" :lg="12"> -->
-      <!-- <img class="login-bg" src="../../assets/images/loginbg.png" alt="background-image" /> -->
-      <!-- </Col> -->
     </Row>
   </div>
 </template>
@@ -57,7 +53,6 @@ export default Login
 .login {
   position: relative;
   overflow: hidden;
-  // background: url("../../assets/images/bg0824b.png") 100% no-repeat;
   background-size: cover;
   &-form {
     width: 500px;
@@ -131,6 +126,20 @@ export default Login
       font-size: 14px;
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+  &-locales {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    li {
+      margin-right: 10px;
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover {
+        color: #3477bd;
       }
     }
   }

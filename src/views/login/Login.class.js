@@ -16,11 +16,11 @@ export default {
             },
             loginFormRule: {
                 username: [
-                    { required: true, message: '请输入账号', trigger: 'blur' },
+                    { required: true, message: this.$t('common_tips1'), trigger: 'blur' },
                     { validator: Rule.of().validate.userlength, trigger: 'blur' }
                 ],
                 password: [
-                    { required: true, message: '请输入密码', trigger: 'blur' },
+                    { required: true, message: this.$t('common_tips2'), trigger: 'blur' },
                     { validator: Rule.of().validate.passwordlength, trigger: 'blur' }
                 ]
             },
@@ -47,8 +47,8 @@ export default {
         })
         localStorage.setItem('isLogin', false)
         this.$Notice.success({
-          title: '登录账号密码提示',
-          desc: '账号:admin 密码:admin123123'
+          title: localStorage.getItem('i18n') === 'zh' ? '登录账号密码提示' : 'Login account password prompt',
+          desc: localStorage.getItem('i18n') === 'zh' ? '账号:admin 密码:admin123123' : 'Username:admin Password:admin123123'
       });
     },
 
@@ -84,6 +84,10 @@ export default {
                     this.pageLoaidng = false
                 }
             )
+        },
+        changeLocal(local) {
+            localStorage.setItem('i18n', local)
+            location.reload()
         }
     }
 }

@@ -117,10 +117,7 @@ export default {
         content: `您确定要删除${row.name}数据吗?`,
         onOk: () => {
           this.$http.post(httpUrl.deleteRoleById, { roleIds: [row.id] }).then(data => {
-            this.$Notice.success({
-              title: '成功',
-              desc: '数据删除成功!'
-            });
+            this.tips()
             this.requestList();
           });
         }
@@ -204,10 +201,7 @@ export default {
           this.$http
             .post(httpUrl.updateRole, params)
             .then(data => {
-              this.$Notice.success({
-                title: '成功',
-                desc: '操作成功'
-              });
+              this.tips()
               this.back();
               this.requestList();
             })

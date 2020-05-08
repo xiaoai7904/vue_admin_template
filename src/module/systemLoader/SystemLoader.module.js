@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import router from '@/router/router';
 import store from '@/store/store';
-// import iview from 'iview';
+import VueI18n from 'vue-i18n';
 import ViewUI from 'view-design';
 
 import Observer from '@/module/observer/Observer.module';
@@ -16,17 +16,21 @@ import PageTableTool from '@/components/pageTableTool/PageTableTool.view';
 import PageModal from '@/components/pageModal/PageModal.view'
 import PageMenuItem from '@/components/menu/menu-item'
 import Viewer from 'v-viewer'
+import { messages } from '@/i18n'
+import FastClick from 'fastclick';
 
-// import 'iview/dist/styles/iview.css';
 import 'viewerjs/dist/viewer.css'
 import 'view-design/dist/styles/iview.css';
 import '@/styles/index.less';
 import 'element-ui/lib/theme-chalk/index.css';
-import FastClick from 'fastclick';
+
 // 解决click 300ms延迟问题
 FastClick.attach(document.body);
 
 const ObserverClass = Observer.of();
+
+let i18n 
+
 /**
  * 系统初始化加载器
  * 全局对象 全局组件可以在这里进行初始化
@@ -64,8 +68,13 @@ class SystemLoader {
     return this;
   }
   mountGlobalPlugin() {
+    Vue.use(VueI18n);
     Vue.use(ViewUI);
-    Vue.use(Viewer)
+    Vue.use(Viewer);
+    i18n = new VueI18n({
+      locale: localStorage.getItem('i18n') || 'en',  
+      messages
+    });
     return this;
   }
   bootstrap() {
@@ -76,7 +85,7 @@ class SystemLoader {
         .mountGlobalVuePrototype()
         .mountGlobalPlugin();
 
-      resolve({ router, store });
+      resolve({ router, store, i18n });
     });
   }
 }
