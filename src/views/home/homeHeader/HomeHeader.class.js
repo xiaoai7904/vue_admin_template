@@ -48,8 +48,7 @@ export default {
               desc: '退出成功'
             });
             localStorage.removeItem('isLogin');
-            location.href = '/login'
-            // this.$router.push('/login');
+            this.$router.push('/login');
           });
         },
         onCancel: () => {}
