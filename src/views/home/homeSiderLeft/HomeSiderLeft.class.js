@@ -54,9 +54,9 @@ export default {
                 {this.menuList.map(item => {
                   if (item.children && item.children.length === 1) {
                     return (
-                      <PageMenuItem name={item.children[0].path} to={item.children[0].path}>
+                      <MenuItem name={item.children[0].path} to={item.children[0].path}>
                         {item.children[0].name}
-                      </PageMenuItem>
+                      </MenuItem>
                     );
                   }
                   return (
@@ -67,9 +67,9 @@ export default {
                       </template>
                       {item.children.map(childrenItem => {
                         return (
-                          <PageMenuItem name={childrenItem.path} to={childrenItem.path}>
+                          <MenuItem name={childrenItem.path} to={childrenItem.path}>
                             {childrenItem.name}
-                          </PageMenuItem>
+                          </MenuItem>
                         );
                       })}
                     </Submenu>
