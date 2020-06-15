@@ -382,9 +382,11 @@ this.$t('login_title')
 
 >Tips: 系统目前只有登录页面使用国际化,其他页面暂时没有添加国际化配置
 
-### 后期版本计划
+### Websocket
 
-* 页面自适应支持
-* 通用页面封装
+[websocket源代码](src/module/websocket/Websocket.module.js),具体实现是使用了`sockjs-client`和`stompjs`两个三方包
 
-**项目持续更新中...**
+```javascript
+// 使用方式 在项目入口处进行初始化
+WebSocket.of().initWebSocket({})
+```

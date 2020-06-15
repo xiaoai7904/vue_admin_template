@@ -41,7 +41,10 @@ export default {
         this.systemInit(data)
       })
     },
-    systemInit(userfront) {}
+    systemInit(userfront) {
+      // 初始化socket
+      WebSocket.of().initWebSocket({})
+    }
   }
 }
 </script>
