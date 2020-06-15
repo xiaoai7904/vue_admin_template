@@ -8,7 +8,7 @@
 import { httpUrl } from '@/module/systemConfig/SystemConfig.module.js';
 import { debounce } from 'lodash';
 import { add } from '@/module/routerStack/RouterStack.module'
-
+import WebSocket from '@/module/websocket/Websocket.module'
 export default {
   name: 'App',
 
@@ -43,7 +43,7 @@ export default {
     },
     systemInit(userfront) {
       // 初始化socket
-      WebSocket.of().initWebSocket({})
+      // WebSocket.of().initWebSocket({})
     }
   }
 }

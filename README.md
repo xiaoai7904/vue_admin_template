@@ -387,6 +387,7 @@ this.$t('login_title')
 [websocket源代码](src/module/websocket/Websocket.module.js),具体实现是使用了`sockjs-client`和`stompjs`两个三方包
 
 ```javascript
+import WebSocket from '@/module/websocket/Websocket.module'
 // 使用方式 在项目入口处进行初始化
 WebSocket.of().initWebSocket({})
 ```
