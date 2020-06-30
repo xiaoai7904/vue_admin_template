@@ -6,6 +6,7 @@ export default HomeSiderLeft;
 <style lang="less">
 .home-left {
   height: calc(100vh - 70px);
+  overflow: hidden;
   .ivu-menu-submenu a.ivu-menu-item {
     font-size: 12px !important;
   }
