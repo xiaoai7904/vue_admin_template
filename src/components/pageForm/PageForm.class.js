@@ -132,7 +132,7 @@ export default {
           }
 
           return (
-            <FormItem prop={item.id} label={isButton ? '' : item.name} class={formItemClassname} rules={this.options.formItemRules ? this.options.formItemRules : null}>
+            <FormItem kye={item.id} prop={item.id} label={isButton ? '' : item.name} class={formItemClassname} rules={this.options.formItemRules ? this.options.formItemRules : null}>
               {buildFormItem(h, item, _this)}
               {item.tips && (typeof item.tips === 'function' ? item.tips(h) : item.tips)}
             </FormItem>
@@ -150,7 +150,7 @@ export default {
                 });
 
                 return (
-                  <FormItem prop={item.id} label={isButton ? '' : item.name} class={formItemClassname}>
+                  <FormItem kye={item.id} prop={item.id} label={isButton ? '' : item.name} class={formItemClassname}>
                     {buildFormItem(h, item, _this)}
                   </FormItem>
                 );
@@ -184,7 +184,7 @@ export default {
                           });
 
                           return (
-                            <FormItem prop={item.id} label={isButton ? '' : item.name} class={formItemClassname}>
+                            <FormItem kye={item.id} prop={item.id} label={isButton ? '' : item.name} class={formItemClassname}>
                               {buildFormItem(h, item, _this)}
                             </FormItem>
                           );
@@ -215,7 +215,7 @@ export default {
       >
         <Form ref="form" props={{ model: this.model }} rules={this.options.rules} inline={this.options.inline} label-width={this.options.labelWidth || 60}>
           {this.createFormItem(h)}
-          <FormItem>
+          <FormItem key="hiddenFormItem">
             <Input v-show={false} />
           </FormItem>
         </Form>
