@@ -20,13 +20,13 @@ export default PageScrollbar;
 .page-scrollbar {
   position: relative;
   transform: translate3d(0, 0, 0);
-  overflow-y: hidden;
-  overflow-x: auto;
-  height: 100%;
-  .iScrollIndicator {
-    background: rgba(144, 147, 153, 0.5) !important;
-    border: 1px solid transparent !important;
-  }
+  // overflow-y: hidden;
+  // overflow-x: auto;
+  // height: 100%;
+  // .iScrollIndicator {
+  //   background: rgba(144, 147, 153, 0.5) !important;
+  //   border: 1px solid transparent !important;
+  // }
   &:hover .iScrollVerticalScrollbar {
     opacity: 1;
   }
