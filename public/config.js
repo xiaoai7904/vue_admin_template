@@ -1,2 +1,2 @@
 //当前环境 dev test online
-window.environment = 'dev'
+window.environment = '0d0'

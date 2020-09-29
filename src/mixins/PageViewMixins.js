@@ -59,7 +59,7 @@ export default {
         let paginationParams = this.pageTableOptions && this.pageTableOptions.pagination ? { page: this.pageTableOptions.pagination.page, pageSize: this.pageTableOptions.pagination.pageSize } : {};
         let extraParams = this.handlerExtraParams ? this.handlerExtraParams() : {}
         params = Object.assign({}, searchParams, paginationParams, params, extraParams);
-        
+
         this.pageLoading(true);
         this.beforRequestCallback && this.beforRequestCallback();
         this.pageTableOptions && (this.pageTableOptions.data = []);
@@ -69,7 +69,7 @@ export default {
             if (this.handlerTableData) {
               this.handlerTableData(data);
             } else {
-              this.createTableData(data.page);
+              this.createTableData(data.data.page);
             }
             resolve();
           })
