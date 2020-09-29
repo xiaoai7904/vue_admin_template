@@ -16,6 +16,7 @@ export const httpUrl = {
     getRoleInfoById: '/sys/role/info',
     // 系统日志
     getLogList: '/sys/log/list',
+    updateRole: '',
 }
 
 export const SysUserType = {
