@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "bing": "vue-cli-service serve --url=http://192.168.1.166:8888"
   },
   "dependencies": {
     "axios": "^0.19.0",

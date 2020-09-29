@@ -19,7 +19,7 @@ export default {
     '$store.state.userInfo': {
       handler(newValue) {
         if (Object.keys(newValue).length) {
-          this.userInfo = Object.assign({}, { userName: newValue.userinfo.userName, id: newValue.userinfo.id, safeCode: newValue.userinfo.safeCode});
+          this.userInfo = Object.assign({}, { userName: newValue.data.userinfo.userName, id: newValue.data.userinfo.id, safeCode: newValue.data.userinfo.safeCode});
         }
       },
       deep: true,

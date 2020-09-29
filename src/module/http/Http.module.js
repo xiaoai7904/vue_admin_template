@@ -61,15 +61,15 @@ class Http {
     if(window.environment === 'dev') {
       return mock(url)
     }
-    
+
     return this.$http.get(url, params);
   }
   post(url, params) {
     if(window.environment === 'dev') {
       return mock(url)
     }
-    
-    return this.$http.post(url, params);
+
+    return this.$http.post(url, params,localStorage.getItem("token") ? {headers: {"token": localStorage.getItem("token")}} : {});
   }
 }
 

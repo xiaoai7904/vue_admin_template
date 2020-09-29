@@ -76,6 +76,7 @@ export default {
                 data => {
                     if (data.data.code === 0) {
                         localStorage.setItem('isLogin', true)
+                        localStorage.setItem('token', data.data.data.token)
                         this.$router.push('/')
                     }
                     this.pageLoaidng = false
