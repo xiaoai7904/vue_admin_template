@@ -1,5 +1,5 @@
 # vue_admin_template
-vue中台系统模版
+vue中台系统模版-go
 
 React后台模版请访问另一项目[react后台模版](https://github.com/xiaoai7904/react_admin_template)
 
@@ -24,7 +24,7 @@ npm run build // 打包生产环境包
     "serve_custom": "vue-cli-service serve --url=http://192.168.1.188:8080", // 配置代理服务器地址
     "build": "vue-cli-service build"
 },
-``` 
+```
 
 ```javascript
 // vue.config.js部分代码
@@ -60,7 +60,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
 ├── src                                 <=  项目主目录
 │   ├── assets                          <=  静态资源
 │   ├── components                      <=  公共组件
-│   │   ├── collapseTransition          <=  折叠组件  
+│   │   ├── collapseTransition          <=  折叠组件
 │   │   ├── pageEditorView              <=  富文本编辑器
 │   │   ├── pageForm                    <=  搜索表单组件
 │   │   ├── pageLoading                 <=  页面loading组件
@@ -68,11 +68,11 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
 │   │   ├── pageNavTag                  <=  打开页面tag标签组件
 │   │   ├── pageResetPassword           <=  重置密码组件
 │   │   ├── pageScrollbar               <=  页面滚动条组件
-│   │   ├── pageTable                   <=  表格组件 
+│   │   ├── pageTable                   <=  表格组件
 │   │   ├── pageTitle                   <=  页面标题组件
 │   ├── i18n                            <=  国际化
 │   ├── lib                             <=  三方库
-│   ├── mixins                          <=  页面公共逻辑    
+│   ├── mixins                          <=  页面公共逻辑
 │   ├── modules                         <=  系统模块
 │   │   ├── export2excel                <=  导出excel
 │   │   ├── historyRecord               <=  历史堆栈
@@ -91,7 +91,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
 │   ├── App.vue                         <=  页面组件文件
 │   ├── main.js                         <=  系统主入口文件
 ├── publilc                             <=  项目静态文件目录
-├── vue.config.js                       <=  vue打包,启动等配置(详细参数 https://cli.vuejs.org/zh/config/)  
+├── vue.config.js                       <=  vue打包,启动等配置(详细参数 https://cli.vuejs.org/zh/config/)
 ├── package.js                          <=  项目跟踪依赖关系和元数据配置文件
 │
 ```
@@ -115,11 +115,11 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
                 pageTitleOptions: {
                     name: '',// 如果没有配置值默认组件内部会使用左侧菜单名字
                     render(h) {} // 可以自定义标题
-                } 
+                }
             }
         }
     }
-</script>  
+</script>
 ```
 ##### PageForm
 
@@ -151,7 +151,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
                             name: '查询',
                             options: {
                                 // 查询回调函数必须返回promise对象
-                                click: () => _this.pageFormSearchBtnCallback() 
+                                click: () => _this.pageFormSearchBtnCallback()
                             }
                         },
                         {
@@ -161,7 +161,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
                             options: {
                                 type: 'default',
                                 // 重置回调函数必须返回promise对象
-                                click: () => _this.pageFormResetBtnCallback() 
+                                click: () => _this.pageFormResetBtnCallback()
                             }
                         }
                     ]
@@ -191,7 +191,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
             },
         }
     }
-</script>  
+</script>
 ```
 
 ##### PageTable
@@ -237,7 +237,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
             }
         }
     }
-</script>  
+</script>
 ```
 ##### PageModal
 
@@ -267,7 +267,7 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
             }
         }
     }
-</script>  
+</script>
 ```
 
 ### Mock数据
@@ -278,18 +278,18 @@ npm run serve_custom // 开发环境服务器代理到http://192.168.1.188:8080
 
 ```javascript
  get(url, params) {
-    // config.js配置变量值 
+    // config.js配置变量值
     if(window.environment === 'dev') {
       return mock(url)
     }
-    
+
     return this.$http.get(url, params);
   }
   post(url, params) {
     if(window.environment === 'dev') {
       return mock(url)
     }
-    
+
     return this.$http.post(url, params);
   }
 ```
@@ -358,7 +358,7 @@ const messages = {
 
 // 挂载国际化
 const i18n = new VueI18n({
-    locale: localStorage.getItem('i18n') || 'en',  
+    locale: localStorage.getItem('i18n') || 'en',
     messages
 });
 
