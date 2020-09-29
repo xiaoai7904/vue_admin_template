@@ -136,26 +136,26 @@ export default {
       this.pageFormOptions = Object.assign({}, this.pageFormOptions, { config: oldConfig });
 
       this.$http.post(httpUrl.getRoleInfoById, { id: row.id, groupDesk: 0}).then(data => {
-        this.createMenuList(data.data.role);
+        this.createMenuList(data.data.data.role);
       });
     },
     createMenuList(data) {
       const add = (addData, treeData) => {
         addData.forEach(item => {
-          if (item.children) {
+          if (item.list) {
             let children = []    
-            add(item.children, children);
+            add(item.list, children);
 
             treeData.push({
               id: item.id,
-              title: item.label,
+              title: item.name,
               parentId: item.parentId,
               children: children
             });
           } else {
             treeData.push({
               id: item.id,
-              title: item.label,
+              title: item.name,
               checked: item.checkStatus === 1,
               parentId: item.parentId
             });
