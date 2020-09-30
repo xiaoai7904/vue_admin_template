@@ -24,7 +24,7 @@ export default {
 
   mounted() {
     this.bindEvent()
-
+    this.systemInit()
     if (!!localStorage.getItem('isLogin')) {
       window.addEventListener('resize',
         debounce(() => {
@@ -43,7 +43,7 @@ export default {
     },
     systemInit(userfront) {
       // 初始化socket
-      // WebSocket.of().initWebSocket({})
+      //  WebSocket.of().initWebSocket({})
     }
   }
 }
