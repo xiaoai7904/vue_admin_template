@@ -116,7 +116,7 @@ export default {
         title: '提示',
         content: `您确定要删除${row.name}数据吗?`,
         onOk: () => {
-          this.$http.post(httpUrl.deleteRoleById, { roleIds: [row.id] }).then(data => {
+          this.$http.post(httpUrl.deleteRoleById, { ids: [row.id] }).then(data => {
             this.tips()
             this.requestList();
           });
@@ -143,7 +143,7 @@ export default {
       const add = (addData, treeData) => {
         addData.forEach(item => {
           if (item.list) {
-            let children = []    
+            let children = []
             add(item.list, children);
 
             treeData.push({
@@ -193,7 +193,7 @@ export default {
             .map(item => item.id)
 
           pageFormRefs.model.seq = +pageFormRefs.model.seq;
-          
+
           let params = Object.assign({ id: this.currentRow.id }, pageFormRefs.model, {
             resourceIdList: [...new Set(indeterCheckIds, checkIds)]
           });

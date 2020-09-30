@@ -42,10 +42,10 @@ class WebScoket {
       this.url = url;
     } else {
       // window.SOCKET_URL = ''
-      url = window.SOCKET_URL ? window.SOCKET_URL : 'http://192.168.1.188:10000';
+      url = window.SOCKET_URL ? window.SOCKET_URL : 'http://192.168.1.9:10053';
       let socketUrl = Utils.of().getSplitUrl(url);
       url = socketUrl.prefix + socketUrl.suffix.replace(/\/+/g, '');
-      this.url = `${url}/live-websocket?username=${this.params.username}`;
+      this.url = `${url}/live-websocket?token="fjkdsjfad"`;
     }
   }
 
