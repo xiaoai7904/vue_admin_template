@@ -219,7 +219,7 @@ export default {
     requestRoleList() {
       if (!this.roleList || this.roleList.length == 0) {
         this.$http.post(httpUrl.getRoleList, {groupDesk: 0}).then(({ data }) => {
-          data.page.list.map(item => {
+          data.data.page.list.map(item => {
             var roleConfig = {
               id: item.id,
               name: item.name
