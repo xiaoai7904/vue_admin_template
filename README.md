@@ -1,5 +1,5 @@
 # vue_admin_template
-vue中台系统模版-go
+vue中台系统模版
 
 React后台模版请访问另一项目[react后台模版](https://github.com/xiaoai7904/react_admin_template)
 
