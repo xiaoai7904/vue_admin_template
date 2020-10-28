@@ -22,27 +22,14 @@ export default {
         inline: true,
         config: [
           {
-            id: 'userName',
+            id: 'username',
             type: 'input',
             name: '账号',
             options: {
               value: ''
             }
           },
-          {
-            id: 'roleId',
-            type: 'select',
-            name: '帐号类型',
-            options: {
-              value: '',
-              list: [
-                {
-                  label: '全部',
-                  value: ''
-                }
-              ]
-            }
-          },
+
           {
             id: 'submit',
             type: 'button',
@@ -67,26 +54,13 @@ export default {
         requestList: this.requestList,
         header: [
           {
-            title: '用户名',
-            key: 'userName',
+            title: '账号',
+            key: 'username',
             align: 'center'
           },
           {
-            title: '账户类型',
-            key: 'rolesList',
-            align: 'center',
-            render(h, { row }) {
-              return row.rolesList && row.rolesList.split(',').map(item => SysUserType[item]);
-            }
-          },
-          {
-            title: '登入账号',
+            title: '昵称',
             key: 'name',
-            align: 'center'
-          },
-          {
-            title: '创建人',
-            key: 'createUserName',
             align: 'center'
           },
           {
@@ -122,7 +96,7 @@ export default {
         labelWidth: 80,
         config: [
           {
-            id: 'userName',
+            id: 'username',
             type: 'input',
             name: '用户名',
             options: {
@@ -144,9 +118,10 @@ export default {
             type: 'input',
             name: '密码',
             options: {
-              type: 'password',
-              value: '',
-              disabled: false,
+                type: 'password',
+                value: '',
+                disabled: false,
+                hidden: () => _this.isEdit
             }
           },
           {
@@ -169,7 +144,7 @@ export default {
           }
         ],
         rules: {
-          userName: [
+          username: [
             {
               required: true,
               message: '请输入用户名',
@@ -218,8 +193,8 @@ export default {
   methods: {
     requestRoleList() {
       if (!this.roleList || this.roleList.length == 0) {
-        this.$http.post(httpUrl.getRoleList, {groupDesk: 0}).then(({ data }) => {
-          data.data.page.list.map(item => {
+        this.$http.post(httpUrl.getRoleList, {}).then(({ data }) => {
+          data.page.list.map(item => {
             var roleConfig = {
               id: item.id,
               name: item.name
@@ -234,7 +209,10 @@ export default {
       this.pageModalFormOptions.config = this.getModelConfig();
       this.requestRoleList();
       this.pageModalOptions.show = true;
-      this.$refs.pageModalFormRefs && this.$refs.pageModalFormRefs.resetData();
+      setTimeout(() => {
+          this.$refs.pageModalFormRefs && this.$refs.pageModalFormRefs.resetData();
+      }, 100)
+
     },
     handleResetPassword(row) {
       this.currentRow = Object.assign({}, row);
@@ -268,8 +246,7 @@ export default {
       let oldConfig = this.getModelConfig();
       oldConfig.forEach(item => {
         if (item.id === 'roles') {
-          item.options.value = row.rolesList;
-          item.options.list.forEach(listItem => (listItem.disabled = true));
+          item.options.value = row.rolesList+"";
         } else {
           item.options && (item.options.value = row[item.id]);
         }
@@ -282,8 +259,11 @@ export default {
       pageModalFormRefs.$refs.form.validate(valid => {
         if (valid) {
           let params = pageModalFormRefs.getData();
-          params.password = Utils.of().md5(params.password);
-          params.roleIdList = [params.roles];
+          !this.isEdit && (params.password = Utils.of().md5(params.password));
+          if(this.isEdit){
+              params.id = this.currentRow.id;
+          }
+          params.rolesList = params.roles;
           delete params.roles;
           this.pageModalOptions.btnLoading = true;
           this.currentRow = {};
@@ -308,9 +288,9 @@ export default {
     getModelConfig() {
       let oldconfig = this.pageModalFormOptions.config;
       oldconfig.forEach(item => {
-        if (['userName', 'name', 'password', 'roles'].includes(item.id)) {
-          item.options.disabled = this.isEdit;
-        }
+        // if (['username', 'name', 'password', 'roles'].includes(item.id)) {
+        //   item.options.disabled = this.isEdit;
+        // }
         if (item.id == 'roles') {
           item.options.list = this.roleList;
         }

@@ -5,7 +5,7 @@
       <Dropdown trigger="click">
         <div class="home-header--right-content">
           <span>
-            {{userInfo.userName}}
+            {{userInfo.username}}
             <Icon type="ios-arrow-down"></Icon>
           </span>
           <img src="../../../assets/images/userHeader.png" alt class="home-header--right-user" />

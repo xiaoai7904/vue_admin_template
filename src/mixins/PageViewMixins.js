@@ -69,7 +69,7 @@ export default {
             if (this.handlerTableData) {
               this.handlerTableData(data);
             } else {
-              this.createTableData(data.data.page);
+              this.createTableData(data.page);
             }
             resolve();
           })

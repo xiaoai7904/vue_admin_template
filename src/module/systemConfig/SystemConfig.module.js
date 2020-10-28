@@ -20,7 +20,7 @@ export const httpUrl = {
     deleteRoleById: '/sys/role/deleterolebyid',
     // 系统日志
     getLogList: '/sys/log/list',
-
+    addUser: '/sys/user/save'
 
 }
 

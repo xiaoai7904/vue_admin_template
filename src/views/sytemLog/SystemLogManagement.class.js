@@ -21,7 +21,7 @@ export default {
         inline: true,
         config: [
           {
-            id: 'userName',
+            id: 'username',
             type: 'input',
             name: '账号',
             options: {
@@ -53,7 +53,7 @@ export default {
         header: [
           {
             title: '账号',
-            key: 'userName',
+            key: 'username',
             align: 'center'
           },
           {
@@ -92,6 +92,6 @@ export default {
   },
 
   methods: {
-    
+
   }
 };
