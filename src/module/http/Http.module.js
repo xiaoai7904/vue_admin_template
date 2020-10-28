@@ -36,9 +36,6 @@ class Http {
         if (response.data && response.data.code === 1401) {
           return Promise.reject(response);
         }
-        if (response.data && blackCode.indexOf(response.data.code) > -1) {
-          return Promise.reject(response);
-        }
         if (response.data && response.data.code) {
           Vue.prototype.$Message.error(response.data.msg);
           return Promise.reject(response);

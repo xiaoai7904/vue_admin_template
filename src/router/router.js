@@ -27,7 +27,7 @@ function initRouter(to, from, next) {
   if (!store.state.routerList.length) {
     store.dispatch('requestUserInfo').then(
       data => {
-        let systemMenu = CreateSystemMenuIns.create(data.data.data.menuList);
+        let systemMenu = CreateSystemMenuIns.create(data.data.userinfo.menuList);
         store.commit('setRouterList', systemMenu.getRouterList());
         store.commit('setMenuList', systemMenu.getMenuList());
 

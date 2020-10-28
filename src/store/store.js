@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { httpUrl } from '@/module/systemConfig/SystemConfig.module.js';
+import {httpUrl} from '@/module/systemConfig/SystemConfig.module.js';
 import Http from '@/module/http/Http.module';
 
 Vue.use(Vuex);

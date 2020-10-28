@@ -37,7 +37,12 @@ export default {
             }
           }
         ],
-        data: []
+        data: [],
+      pagination: {
+          pageSize: 20,
+          total: 0,
+          page: 1
+      }
       },
       pageFormOptions: {
         modalForm: true,
@@ -107,7 +112,7 @@ export default {
   },
 
   mounted() {
-    this.requestList({groupDesk: 0}, httpUrl.getRoleList);
+    this.requestList({}, httpUrl.getRoleList);
   },
 
   methods: {
@@ -135,14 +140,14 @@ export default {
 
       this.pageFormOptions = Object.assign({}, this.pageFormOptions, { config: oldConfig });
 
-      this.$http.post(httpUrl.getRoleInfoById, { id: row.id, groupDesk: 0}).then(data => {
-        this.createMenuList(data.data.data.role);
+      this.$http.post(httpUrl.getRoleInfoById, { id: row.id}).then(data => {
+        this.createMenuList(data.data.role);
       });
     },
     createMenuList(data) {
       const add = (addData, treeData) => {
         addData.forEach(item => {
-          if (item.list) {
+          if (item.list && item.list.length) {
             let children = []
             add(item.list, children);
 
