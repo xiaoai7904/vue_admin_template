@@ -33,6 +33,8 @@ export default {
             title: '操作',
             key: 'operates',
             align: 'center',
+            width: 140,
+            fixed: 'right',
             render(h, { row }) {
               return <PageTableTool options={[{ id: 'del', name: '删除', permission: false, click: _this.handleDel.bind(_this, row) }, { id: 'edit', name: '编辑', permission: false, click: _this.handleEdit.bind(_this, row) }]} />;
             }

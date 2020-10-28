@@ -23,8 +23,9 @@ export const httpUrl = {
     // 系统日志
     getLogList: '/sys/log/list',
     // 添加用户
-    addUser: '/sys/user/save'
-
+    addUser: '/sys/user/save',
+    // 删除用户
+    deleteUser: '/sys/user/deletebyid',
 }
 
 export const SysUserType = {

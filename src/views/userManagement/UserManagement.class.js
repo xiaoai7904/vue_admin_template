@@ -67,10 +67,13 @@ export default {
             title: '操作',
             key: 'operates',
             align: 'center',
+            width: 180,
+            fixed: 'right',
             render(h, { row }) {
               return (
                 <PageTableTool
                   options={[
+                    { name: '删除', permission: false, click: _this.handleDel.bind(_this, row) },
                     { name: '重置密码', permission: false, click: _this.handleResetPassword.bind(_this, row) },
                     { name: '编辑', permission: false, click: _this.handleEdit.bind(_this, row) }
                   ]}
@@ -227,7 +230,7 @@ export default {
         content: `您确定要删除${row.name}数据吗?`,
         onOk: () => {
           this.$http
-            .post(httpUrl.deleteUser, { userIds: [row.id] })
+            .post(httpUrl.deleteUser, { id: row.id })
             .then(data => {
               this.pageModalOptions.show = false;
               this.tips()
