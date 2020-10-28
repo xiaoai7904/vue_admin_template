@@ -101,8 +101,8 @@ export default {
                 if (valid) {
                     let httpURL = this.url || httpUrl.commonResetPassword
                     let params = {
-                        userId: _this.userId,
-                        newPassword: Utils.of().md5(pageModalFormRefs.getData().password),
+                        id: _this.userId,
+                        password: Utils.of().md5(pageModalFormRefs.getData().password),
                     }
 
                     _this.$http
