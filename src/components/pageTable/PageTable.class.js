@@ -16,7 +16,8 @@ export default {
             page: 1
           },
           header: [],
-          data: []
+          data: [],
+          sort: {}
         };
       }
     }
@@ -24,7 +25,8 @@ export default {
 
   watch: {
     'options.data': {
-      handler(newValue) {
+      handler(newValue, oldValue) {
+        this.tableData = newValue
         this.handlerTableWidth(newValue);
       },
       deep: true
@@ -34,19 +36,25 @@ export default {
   data() {
     return {
       tableColumns: [],
+      tableData: [],
       changePageSizeTemp: null, //改变每页数量时选择的数量
       tableHeigth: null, //设置表格高度
       tableID: Utils.of().uuid() //当前table id
     };
   },
-  beforeMount() {
+  // beforeMount() {
+  //   this.$customEvent.off(['resize-table', this.tableID]).on(['resize-table', this.tableID], () => {
+  //     this.tableHeigth = this.getTableHeight();
+  //   });
+  // },
+  mounted() {
     this.$customEvent.off(['resize-table', this.tableID]).on(['resize-table', this.tableID], () => {
       this.tableHeigth = this.getTableHeight();
     });
-  },
-  mounted() {
+   
     setTimeout(() => {
-      this.$customEvent.trigger(['resize-table', this.tableID]);
+      this.tableHeigth = this.getTableHeight();
+      // this.$customEvent.trigger(['resize-table', this.tableID]);
     }, 400);
     this.filterHeader();
   },
@@ -58,8 +66,7 @@ export default {
         let windowHeight = document.documentElement.clientHeight;
         let offsetTop = dom.getBoundingClientRect().top;
         let tableHeight = windowHeight - offsetTop - 45;
-        return tableHeight >= 150 ? tableHeight : 150;
-      } else {
+        return tableHeight >= 300 ? tableHeight : 300;
       }
     },
     getPagination() {
@@ -88,7 +95,7 @@ export default {
       if (data.length) {
         let headerObj = {};
         let newHeader = this.tableColumns.slice();
-
+        
         newHeader.forEach(headerItem => {
           data.map(item => {
             if(headerItem.key) {
@@ -102,8 +109,8 @@ export default {
               let len = tableTitle > tableData ? tableTitle : tableData;
   
               headerObj[headerItem.key].push(len * 10);
+              (item[headerItem.key] === null || item[headerItem.key] === '') && (item[headerItem.key] = '--')
             }
-            
           });
           if (!headerItem.minWidth && !headerItem.wdith) {
             if (!headerObj[headerItem.key]) {
@@ -114,8 +121,18 @@ export default {
               headerItem.minWidth = Math.max(...headerObj[headerItem.key]);
             }
           }
+
+          if(headerItem.sortable === 'custom') {
+            if(headerItem.key === this.options.sort.key) {
+              headerItem['sortType'] = Object.keys(this.options.sort).length ? this.options.sort.order : '';
+            }else {
+              headerItem['sortType'] = '';
+            }
+          }
         });
-        this.tableColumns = newHeader.slice();
+        this.tableColumns = newHeader.slice(0);
+        this.tableData = data.slice(0)
+        this.updateTableHeaderScroll()
       }
     },
     getStrLen(str) {
@@ -127,26 +144,42 @@ export default {
         else realLength += 2;
       }
       return realLength;
+    },
+    updateTableHeaderScroll() {
+      try {
+        setTimeout(() => {   
+          let $refs = this.$refs.table
+          $refs.$refs.header.scrollLeft = $refs.$refs.body.scrollLeft
+          $refs.$refs.body.scrollTop = $refs.$refs.body.scrollTop - 0.5
+        }, 100)
+      } catch (error) {
+        
+      }
     }
   },
 
   render(h) {
-    let { header = [], data = [], loading = false, pagination = null, requestList = null, border = false } = this.options;
+    let { header = [], data = [], loading = false, pagination = null, requestList = null, border = false, stripe = true, rowClassName, tableHeight} = this.options;
 
     return (
       <div class="table-container" id={'table-id-' + this.tableID}>
         <Table
-          stripe
+          ref="table"
+          highlight-row
+          row-key="id"
+          stripe={stripe}
           border={border}
           columns={this.tableColumns}
-          data={data}
+          data={this.tableData}
           loading={loading}
-          height={this.tableHeigth}
+          height={tableHeight || this.tableHeigth}
+          row-class-name={rowClassName}
           size="small"
           onOn-select={(selection, row) => this.$emit('select', selection, row)}
           onOn-select-cancel={(selection, row) => this.$emit('selectCancel', selection, row)}
           onOn-select-all={selection => this.$emit('selectAll', selection)}
           onOn-select-all-cancel={selection => this.$emit('selectAllCancel', selection)}
+          onOn-sort-change={(column, key, order) => this.$emit('sortChange', column, key, order)}
         >
           <div slot="footer" className="table-height">
             {pagination && (
@@ -155,11 +188,12 @@ export default {
                 disabled={loading}
                 total={pagination.total}
                 size="small"
-                show-elevator
-                show-sizer
+                show-elevator={pagination.elevator !== undefined ? pagination.elevator : true}
+                show-sizer={pagination.sizer !== undefined ? pagination.sizer : true}
                 show-total
                 current={pagination.page}
                 page-size={pagination.pageSize || 20}
+                page-size-opts={[10, 20, 30, 40, 50]}
                 onOn-change={page => {
                   let $$tableOverflowY = document.querySelector('#table-id-' + this.tableID + ' .ivu-table-overflowY')
                   $$tableOverflowY && ($$tableOverflowY.scrollTop = 0)
@@ -192,9 +226,9 @@ export default {
           </div>
           <div slot="loading">
             <Spin fix>
-              <Icon type="ios-loading" size="50" class="demo-spin-icon-load" />
-              <div>
-                <span>loading</span>
+              <Icon type="ios-loading" size="30" class="demo-spin-icon-load" />
+              <div class="loading-text">
+                <span>加载中</span>
                 <span class={'dot'}>...</span>
               </div>
             </Spin>

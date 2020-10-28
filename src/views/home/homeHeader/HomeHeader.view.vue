@@ -15,7 +15,7 @@
           <DropdownItem @click.native="logout">退出登录</DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <PageResetPassword ref="resetPasswordRef" :userId="userInfo.id" />
+      <PageResetPassword ref="resetPasswordRef" :userId="userInfo.id" :url="resetPasswordUrl"/>
     </div>
 
   </div>

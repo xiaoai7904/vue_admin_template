@@ -1,6 +1,7 @@
 <template>
   <div class="role-management">
     <PageTitle :options="pageTitleOptions">
+      <Button v-show="currnetPage === 1" type="primary" @click="add" slot="setting">新增</Button>
       <Button v-show="currnetPage === 2" type="success" @click="back" slot="setting">返回上一级</Button>
     </PageTitle>
     <div v-show="currnetPage === 1" class="role-management-page1">

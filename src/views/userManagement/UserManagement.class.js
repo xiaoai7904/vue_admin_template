@@ -98,10 +98,10 @@ export default {
           {
             id: 'username',
             type: 'input',
-            name: '用户名',
+            name: '账号',
             options: {
               value: '',
-              disabled: false,
+              disabled: _this.isEdit,
             }
           },
           {
@@ -147,7 +147,7 @@ export default {
           username: [
             {
               required: true,
-              message: '请输入用户名',
+              message: '请输入账号',
               trigger: 'blur'
             },
             {
@@ -158,7 +158,7 @@ export default {
           name: [
             {
               required: true,
-              message: '请输入登入帐号',
+              message: '请输入昵称',
               trigger: 'blur'
             }
           ],

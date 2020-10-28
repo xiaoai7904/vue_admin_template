@@ -12,6 +12,7 @@ export default {
         id: '',
         safeCode: '',
       },
+      resetPasswordUrl: httpUrl.userResetpwd
     };
   },
 

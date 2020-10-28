@@ -52,31 +52,50 @@ export default {
         requestList: this.requestList,
         header: [
           {
-            title: '账号',
-            key: 'username',
-            align: 'center'
+              title: '账号',
+              key: 'username',
+              align: 'center'
           },
           {
-            title: '请求方法',
-            key: 'method',
-            align: 'center',
+              title: '请求类',
+              key: 'className',
+              align: 'center',
+              tooltip: true,
+              width: 200
           },
           {
-            title: '请求参数',
-            key: 'params',
-            align: 'center'
+              title: '请求方法',
+              key: 'method',
+              align: 'center',
+              tooltip: true,
+              width: 200
           },
           {
-            title: '执行时长',
-            key: 'time',
-            align: 'center'
+              title: '请求参数',
+              key: 'params',
+              align: 'center',
+              tooltip: true,
+              width: 200
           },
           {
-            title: '创建时间',
-            key: 'createTime',
-            align: 'center'
+              title: '执行时长',
+              key: 'time',
+              align: 'center'
+          },
+          {
+              title: 'IP',
+              key: 'clientIp',
+              align: 'center'
+          },
+          {
+              title: '创建时间',
+              key: 'createTime',
+              align: 'center',
+              render(h, { row }) {
+                  return <span>{Utils.of().formatDateStr(row.createTime)}</span>
+              }
           }
-        ],
+      ],
         data: [],
         pagination: {
             pageSize: 20,

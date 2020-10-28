@@ -100,11 +100,15 @@ export default {
             pageModalFormRefs.$refs.form.validate((valid) => {
                 if (valid) {
                     let httpURL = this.url || httpUrl.commonResetPassword
-                    let params = {
+                    let params = Object.assign({
                         id: _this.userId,
                         password: Utils.of().md5(pageModalFormRefs.getData().password),
-                    }
+                    })
 
+                    if(_this.pwdType === 'self') {
+                        params.oldpassword = Utils.of().md5(pageModalFormRefs.getData().oldpassword)
+                    }
+                    
                     _this.$http
                         .post(httpURL, params)
                         .then((data) => {

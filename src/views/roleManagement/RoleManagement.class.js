@@ -10,6 +10,7 @@ export default {
   data() {
     const _this = this;
     return {
+      isEdit:false,
       currnetPage: 1,
       pageTitleOptions: {
         name: ''
@@ -116,6 +117,14 @@ export default {
   },
 
   methods: {
+    add() {
+      this.isEdit = false
+      this.currnetPage = 2
+      setTimeout(() => {
+          this.$refs.pageFormRefs.resetData()
+          this.requestMenuList()
+      }, 0)
+    },
     handleDel(row) {
       this.$Modal.confirm({
         title: '提示',
@@ -129,6 +138,7 @@ export default {
       });
     },
     handleEdit(row) {
+      this.isEdit = true
       this.currnetPage = 2;
       this.currentRow = Object.assign({}, row);
 
@@ -140,10 +150,13 @@ export default {
 
       this.pageFormOptions = Object.assign({}, this.pageFormOptions, { config: oldConfig });
 
-      this.$http.post(httpUrl.getRoleInfoById, { id: row.id}).then(data => {
-        this.createMenuList(data.data.role);
-      });
+      this.requestMenuList({id: row.id})
     },
+    requestMenuList(params = {}) {
+      this.$http.post(httpUrl.getRoleInfoById, params).then(data => {
+          this.createMenuList(data.data.role)
+      })
+  },
     createMenuList(data) {
       const add = (addData, treeData) => {
         addData.forEach(item => {
@@ -199,7 +212,7 @@ export default {
 
           pageFormRefs.model.seq = +pageFormRefs.model.seq;
 
-          let params = Object.assign({ id: this.currentRow.id }, pageFormRefs.model, {
+          let params = Object.assign(this.isEdit ? { id: this.currentRow.id } : {}, pageFormRefs.model, {
             resourceIdList: [...new Set(indeterCheckIds, checkIds)]
           });
 

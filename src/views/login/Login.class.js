@@ -11,7 +11,7 @@ export default {
         return {
             loginFormModel: {
                 username: isRemeber,
-                password: 'admin123123',
+                password: '',
                 safeCode: ''
             },
             loginFormRule: {
@@ -72,7 +72,7 @@ export default {
         },
         requestLogin() {
             this.pageLoaidng = true
-            this.$http.post(httpUrl.login, { loginSource: 'PC', userType: parseInt(this.userType), rememberMe: 1, safeCode: this.loginFormModel.safeCode, username: this.loginFormModel.username, password: Utils.of().md5(this.loginFormModel.password) }).then(
+            this.$http.post(httpUrl.login, { rememberMe: 1, username: this.loginFormModel.username, password: Utils.of().md5(this.loginFormModel.password) }).then(
                 data => {
                     if (data.data.code === 0) {
                         localStorage.setItem('isLogin', true)

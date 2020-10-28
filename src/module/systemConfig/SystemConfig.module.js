@@ -8,8 +8,10 @@ export const httpUrl = {
     getUserInfo: '/sys/menu/nav',
     // 查询用户
     getUserList: '/sys/user/list',
-    // 修改密码
+    // 修改下级密码
     commonResetPassword: '/sys/user/password',
+    // 修改自己密码
+    userResetpwd: '/sys/user/resetpwd',
     // 获取角色管理
     getRoleList: '/sys/role/list',
     // 获取选中角色对应的权限列表·
@@ -20,6 +22,7 @@ export const httpUrl = {
     deleteRoleById: '/sys/role/deleterolebyid',
     // 系统日志
     getLogList: '/sys/log/list',
+    // 添加用户
     addUser: '/sys/user/save'
 
 }

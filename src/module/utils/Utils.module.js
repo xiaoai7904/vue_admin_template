@@ -190,6 +190,9 @@ class Utils {
     //
     return MD5(word);
   }
+  formatDateStr(dateStr) {
+    return !dateStr ? '--' : dateStr.replace(/T/g, ' ')
+  }
 }
 
 Utils.of = function() {
