@@ -67,15 +67,15 @@ export default {
               clearable: true
             }
           },
-          {
-            id: 'seq',
-            type: 'input',
-            name: '排序值',
-            options: {
-              value: '',
-              clearable: true
-            }
-          },
+          // {
+          //   id: 'seq',
+          //   type: 'input',
+          //   name: '排序值',
+          //   options: {
+          //     value: '',
+          //     clearable: true
+          //   }
+          // },
           {
             id: 'customMenu',
             type: 'customRender',
@@ -103,7 +103,7 @@ export default {
         rules: {
           name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
           description: [{ required: true, message: '请输入描述', trigger: 'blur' }],
-          seq: [{ required: true, message: '请输入排序值', trigger: 'blur' }]
+          // seq: [{ required: true, message: '请输入排序值', trigger: 'blur' }]
         }
       },
       menuTreeData: [],
