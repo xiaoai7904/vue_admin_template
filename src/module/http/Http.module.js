@@ -54,18 +54,18 @@ class Http {
       }
     );
   }
-  get(url, params) {
+  get(url, params = {}) {
     if(window.environment === 'dev') {
       return mock(url)
     }
-
+    params.requestTimeStamp = Date.now()
     return this.$http.get(url, params);
   }
-  post(url, params) {
+  post(url, params = {}) {
     if(window.environment === 'dev') {
       return mock(url)
     }
-
+    params.requestTimeStamp = Date.now()
     return this.$http.post(url, params,localStorage.getItem("token") ? {headers: {"token": localStorage.getItem("token")}} : {});
   }
 }
