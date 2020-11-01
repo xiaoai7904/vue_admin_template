@@ -7,6 +7,17 @@ export default class Export2excel extends Observable {
     constructor() {
         super();
     }
+    handlerResponseHeader(headers) {
+        let arr = headers.trim().split(/[\r\n]+/)
+        let headerMap = {}
+        arr.forEach(function(line) {
+            let parts = line.split(': ')
+            let header = parts.shift()
+            let value = parts.join(': ')
+            headerMap[header] = value
+        })
+        return headerMap
+    }
     /**
      * 下载文件
      * @param {*} _blob
@@ -32,27 +43,26 @@ export default class Export2excel extends Observable {
      * @param {*} options
      */
     asyncExport2excel(url, options) {
-        let _this = this;
+        let _this = this
         return new Promise((resolve, reject) => {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader(
-                "Content-Type",
-                "application/json;charset=UTF-8"
-            );
-            xhr.responseType = "blob";
+            var xhr = new XMLHttpRequest()
+            xhr.open('POST', url, true)
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+            xhr.responseType = 'blob'
             xhr.onload = function() {
                 if (this.status === 200) {
-                    let blob = this.response;
-                    _this.fileName = options.fileName;
-                    _this.download(blob);
-                    resolve();
+                    let headerMap = _this.handlerResponseHeader(xhr.getAllResponseHeaders())
+                    let fileName = headerMap['content-disposition'].match(/filename=(\S*)/)
+                    let blob = this.response
+                    _this.fileName = fileName ? decodeURI(fileName[1]) : options.fileName || options.fileName
+                    _this.download(blob)
+                    resolve()
                 } else {
-                    reject();
+                    reject()
                 }
-            };
-            xhr.send(JSON.stringify(options.params));
-        });
+            }
+            xhr.send(JSON.stringify(options.params))
+        })
     }
     /**
      * XML 下载

@@ -26,6 +26,8 @@ export const httpUrl = {
     addUser: '/sys/user/save',
     // 删除用户
     deleteUser: '/sys/user/deletebyid',
+    // 导出用户表
+    exportUser: '/sys/user/export'
 }
 
 export const SysUserType = {

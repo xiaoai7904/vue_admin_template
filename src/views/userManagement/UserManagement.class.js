@@ -4,7 +4,7 @@ import Rule from '@/module/rule/Rule.module';
 import Utils from '@/module/utils/Utils.module';
 import PageResetPassword from '@/components/pageResetPassword/PageResetPassword.view';
 import PageViewMixins from '@/mixins/PageViewMixins';
-
+import ExportUtils from '@/module/export2excel/export2excel'
 export default {
   name: 'userManagement',
   components: {  PageResetPassword },
@@ -299,6 +299,12 @@ export default {
         }
       })
       return oldconfig;
+    },
+    exportUser() {
+      new ExportUtils().asyncExport2excel(httpUrl.exportUser, {
+        params: {},
+        fileName: '用户.xls'
+      })
     }
   }
 };

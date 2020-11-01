@@ -2,6 +2,7 @@
   <div class="user-management">
       <PageTitle :options="pageTitleOptions">
           <Button type="primary" @click="addUser" slot="setting">新增</Button>
+          <!-- <Button type="primary" @click="exportUser" slot="setting">导出</Button> -->
       </PageTitle>
       <PageForm ref="pageFormRefs" :options="pageFormOptions"/>
       <PageTable :options="pageTableOptions" @change-table-pagination="changeTablePagination"/>
