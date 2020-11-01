@@ -27,7 +27,11 @@ export const httpUrl = {
     // 删除用户
     deleteUser: '/sys/user/deletebyid',
     // 导出用户表
-    exportUser: '/sys/user/export'
+    exportUser: '/sys/user/export',
+    // 上传文件
+    uploadUrl: '/sys/upload/uploadfile',
+    // 删除文件
+    delUploadUrl: '/sys/upload/deletefile'
 }
 
 export const SysUserType = {

@@ -15,6 +15,11 @@ const router = new Router({
 const CreateSystemMenuIns = new CreateSystemMenu();
 
 router.beforeEach((to, from, next) => {
+  if(to.path === '/test') {
+    next()
+    return;
+  }
+
   if (localStorage.getItem('isLogin') === 'true') {
     initRouter(to, from, next);
     return;

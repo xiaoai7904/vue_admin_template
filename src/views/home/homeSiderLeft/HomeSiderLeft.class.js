@@ -15,7 +15,7 @@ export default {
       handler(newValue) {
         if (!this.menuList.length) {
           this.menuList = newValue.slice(0);
-          if (newValue[0].children) {
+          if (newValue[0] && newValue[0].children) {
             if (this.$router.currentRoute.path === '/') {
               this.checkMenu = newValue[0].children[0].path;
               this.$router.push(newValue[0].children[0].path);
@@ -23,6 +23,18 @@ export default {
               this.checkMenu = this.$router.currentRoute.path;
             }
           }
+          this.menuList.push({
+            id: 'test',
+            name: '测试页面',
+            icon: '',
+            path: '/test',
+            children: [{
+              id: 'test',
+              name: '测试页面',
+              icon: '',
+              path: '/test',
+            }]
+          })
           this.openMenus = newValue.map(item => item.name)
           this.openChange()
         }
