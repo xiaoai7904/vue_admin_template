@@ -20,6 +20,17 @@ export const defaultRouterConfig = [
     },
 ]
 
+export const staticRouterConfig = [
+    {
+        path: '/richText',
+        name: 'richText',
+        meta: {
+            name: '富文本'
+        },
+        component: () => import('@/views/richText/RichText.view.vue'),
+    }
+]
+
 export const requestRouterConfig = {
     // 首页
     '/home/home': {

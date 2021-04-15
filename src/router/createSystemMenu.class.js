@@ -1,4 +1,4 @@
-import { requestRouterConfig, defaultRouterConfig } from './router.config'
+import { requestRouterConfig, defaultRouterConfig, staticRouterConfig} from './router.config'
 import store from '@/store/store'
 
 /**
@@ -41,7 +41,21 @@ export default class CreateSystemMenu {
                 })
             }
             menu.push(menuItemInfo)
-            router = [...router, ...routerItemInfo]
+            router = [...router, ...routerItemInfo, ...staticRouterConfig]
+        })
+
+        menu.push({
+            id: 'custom',
+            name: '静态路由',
+            icon: '',
+            children: staticRouterConfig.map(item => {
+                return {
+                    id: 'custom_' + item.name,
+                    name: item.meta.name,
+                    icon: '',
+                    path: item.path,
+                }
+            })
         })
 
         this.systemMenuList = menu.slice(0)
